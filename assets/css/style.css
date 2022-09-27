@@ -15,6 +15,7 @@ body {
   background-color: #212529;
   color: #ffffff;
   padding: 25px 60px;
+  margin-bottom: 30px;
 }
 .navbar .cart {
   position: relative;
@@ -33,4 +34,54 @@ body {
   color: white;
   padding: 3px;
   border-radius: 3px;
+}
+
+.shop {
+  display: grid;
+  grid-template-columns: repeat(4, 223px);
+  gap: 30px;
+  justify-content: center;
+}
+.shop .item {
+  border: 2px solid #212529;
+  border-radius: 4px;
+}
+.shop .item img {
+  max-height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+.shop .item .details {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+.shop .item .details .price-quantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.shop .item .details .price-quantity .buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  font-size: 16px;
+}
+.shop .item .details .price-quantity .buttons .bi-dash {
+  color: red;
+}
+.shop .item .details .price-quantity .buttons .bi-plus {
+  color: green;
+}
+
+@media (max-width: 1000px) {
+  .shop {
+    grid-template-columns: repeat(2, 223px);
+  }
+}
+@media (max-width: 500px) {
+  .shop {
+    grid-template-columns: repeat(1, 223px);
+  }
 }
