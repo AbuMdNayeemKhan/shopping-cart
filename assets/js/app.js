@@ -1,30 +1,32 @@
 let shop = document.getElementById('shop');
 
 let shopItemsData = [{
-    id: "iav9a02",
+    id: "wfd",
     name: "Camera",
     price: 22,
     desc: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
     img: "assets/img/item-1.jpg"
 }, {
-    id: "xav9a02",
+    id: "sggr",
     name: "Digital Camera",
     price: 17,
     desc: "Norem ipsum, amet consectetur adipisicing elit.",
     img: "assets/img/item-2.jpg"
 }, {
-    id: "iav9at2",
+    id: "xbvrf",
     name: "Wild Items",
     price: 67,
     desc: "Dolor sit amet consectetur adipisicing elit.",
     img: "assets/img/item-3.jpg"
 }, {
-    id: "iai3a02",
+    id: "chfh",
     name: "Old Camera",
     price: 45,
     desc: "Ipsum, dolor sit amet consectetur adipisicing elit.",
     img: "assets/img/item-4.jpg"
 }];
+
+let basket = [];
 
 let generateShop = () =>{
     return (shop.innerHTML = shopItemsData.map((i)=>{
@@ -38,9 +40,9 @@ let generateShop = () =>{
                 <div class="price-quantity">
                     <h2>$ ${price}</h2>
                     <div class="buttons">
-                        <i class="bi bi-dash"></i>
-                        <div class="quantity">0</div>
-                        <i class="bi bi-plus"></i>
+                        <i onclick="decrement(${id})" class="bi bi-dash"></i>
+                        <div id=${id} class="quantity">0</div>
+                        <i onclick="increment(${id})" class="bi bi-plus"></i>
                     </div>
                 </div>
             </div>
@@ -51,20 +53,38 @@ let generateShop = () =>{
 
 generateShop();
 
-// `
-//         <div class="item">
-//             <img width="220" src="assets/img/items-1.jpg" alt="">
-//             <div class="details">
-//                 <h3>DSLR Camera</h3>
-//                 <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-//                 <div class="price-quantity">
-//                     <h2>$ 45</h2>
-//                     <div class="buttons">
-//                         <i class="bi bi-dash"></i>
-//                         <div class="quantity">0</div>
-//                         <i class="bi bi-plus"></i>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     `
+let increment = (id) => {
+    let selectedItem = id;
+    let search = basket.find((x) => x.id === selectedItem.id);
+
+    if(search === undefined){
+        basket.push({
+            id: selectedItem.id,
+            item: 1,
+        });
+    } else {
+        search.item +=1;
+    }
+    console.log(basket);
+    update(selectedItem.id);
+};
+
+let decrement = (id) => {
+    let selectedItem = id;
+    let search = basket.find( (x) => x.id === selectedItem.id );
+
+    if(search.item === 0){
+        return;
+    } else {
+        search.item -= 1;
+    }
+
+    console.log(basket);
+    update(selectedItem.id);
+};
+
+let update = (id) => {
+    let search = basket.find((x) => x.id === id);
+    console.log(search.item);
+    document.getElementById(id).innerHTML = search.item;
+};
